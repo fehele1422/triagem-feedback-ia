@@ -1,0 +1,95 @@
+{
+  "name": "Triagem de feedback com IA",
+  "nodes": [
+    {
+      "parameters": {"httpMethod": "POST", "path": "feedback", "responseMode": "lastNode", "options": {}},
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "name": "Webhook feedback",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "triagem-feedback"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/triagem",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ texto: $json.body.texto }) }}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0002-4000-8000-000000000002",
+      "name": "Chamar agente de triagem",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {"caseSensitive": true, "leftValue": "", "typeValidation": "strict"},
+          "conditions": [
+            {
+              "id": "a1b2c3d4-0003-4000-8000-0000000000c1",
+              "leftValue": "={{ $json.urgencia }}",
+              "rightValue": "alta",
+              "operator": {"type": "string", "operation": "equals"}
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0003-4000-8000-000000000003",
+      "name": "Urgência alta?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {"id": "a1b2c3d4-0004-4000-8000-0000000000a1", "name": "destino", "value": "fila_urgente", "type": "string"},
+            {"id": "a1b2c3d4-0004-4000-8000-0000000000a2", "name": "categoria", "value": "={{ $json.categoria }}", "type": "string"},
+            {"id": "a1b2c3d4-0004-4000-8000-0000000000a3", "name": "resposta_sugerida", "value": "={{ $json.resposta_sugerida }}", "type": "string"}
+          ]
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0004-4000-8000-000000000004",
+      "name": "Fila urgente",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [680, -100]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {"id": "a1b2c3d4-0005-4000-8000-0000000000b1", "name": "destino", "value": "fila_normal", "type": "string"},
+            {"id": "a1b2c3d4-0005-4000-8000-0000000000b2", "name": "categoria", "value": "={{ $json.categoria }}", "type": "string"},
+            {"id": "a1b2c3d4-0005-4000-8000-0000000000b3", "name": "resposta_sugerida", "value": "={{ $json.resposta_sugerida }}", "type": "string"}
+          ]
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0005-4000-8000-000000000005",
+      "name": "Fila normal",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [680, 100]
+    }
+  ],
+  "connections": {
+    "Webhook feedback": {"main": [[{"node": "Chamar agente de triagem", "type": "main", "index": 0}]]},
+    "Chamar agente de triagem": {"main": [[{"node": "Urgência alta?", "type": "main", "index": 0}]]},
+    "Urgência alta?": {"main": [
+      [{"node": "Fila urgente", "type": "main", "index": 0}],
+      [{"node": "Fila normal", "type": "main", "index": 0}]
+    ]}
+  },
+  "active": false,
+  "settings": {"executionOrder": "v1"}
+}

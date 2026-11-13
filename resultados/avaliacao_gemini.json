@@ -1,0 +1,24 @@
+{
+  "modo": "gemini",
+  "casos": 30,
+  "falhas": 0,
+  "acuracia_categoria": 1.0,
+  "acuracia_urgencia": 0.933,
+  "acuracia_ambos": 0.933,
+  "latencia_media_s": 9.464,
+  "erros": [
+    {
+      "id": "16",
+      "texto": "Veio sem talheres",
+      "esperado": "item_faltando/baixa",
+      "previsto": "item_faltando/media"
+    },
+    {
+      "id": "26",
+      "texto": "Entrega muito demorada com quase 1 hora de atraso",
+      "esperado": "atraso/media",
+      "previsto": "atraso/alta"
+    }
+  ],
+  "falhas_detalhe": []
+}

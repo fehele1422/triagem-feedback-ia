@@ -1,0 +1,23 @@
+{
+  "modo": "gemini",
+  "casos": 30,
+  "falhas": 1,
+  "acuracia_categoria": 0.967,
+  "acuracia_urgencia": 0.933,
+  "acuracia_ambos": 0.933,
+  "latencia_media_s": 8.934,
+  "erros": [
+    {
+      "id": "16",
+      "texto": "Veio sem talheres",
+      "esperado": "item_faltando/baixa",
+      "previsto": "item_faltando/media"
+    }
+  ],
+  "falhas_detalhe": [
+    {
+      "id": "26",
+      "erro": "Gemini respondeu 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+    }
+  ]
+}

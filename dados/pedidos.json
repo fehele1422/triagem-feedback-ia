@@ -1,0 +1,6 @@
+{
+  "1001": {"status": "entregue", "prometido_min": 40, "real_min": 98, "itens": ["Hambúrguer", "Batata frita"]},
+  "1002": {"status": "entregue", "prometido_min": 35, "real_min": 33, "itens": ["Pizza grande"]},
+  "1003": {"status": "em_rota", "prometido_min": 45, "real_min": 125, "itens": ["Combo executivo"]},
+  "1004": {"status": "entregue", "prometido_min": 50, "real_min": 52, "itens": ["Combo família"]}
+}

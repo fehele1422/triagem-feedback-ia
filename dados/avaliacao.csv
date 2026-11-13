@@ -1,0 +1,31 @@
+id,texto,categoria,urgencia
+1,Meu pedido 1001 demorou mais de uma hora e meia para chegar,atraso,alta
+2,Chegou uns 10 minutos depois do previsto sem problemas,atraso,baixa
+3,Faltou o refrigerante no pedido 1002,item_faltando,media
+4,Esqueceram a batata frita e só veio o hambúrguer,item_faltando,media
+5,Fui cobrado duas vezes no cartão pelo mesmo pedido,cobranca,alta
+6,Quero o estorno da taxa de entrega pois foi cobrada mesmo com frete grátis,cobranca,media
+7,Encontrei um cabelo na minha comida,qualidade_comida,alta
+8,A pizza chegou fria e a massa crua,qualidade_comida,media
+9,Tenho alergia a amendoim e o prato veio com amendoim e estou passando mal,qualidade_comida,alta
+10,O aplicativo travou na hora de pagar e não abre mais,app_bug,media
+11,Parabéns ao entregador super educado e rápido,elogio,baixa
+12,Excelente atendimento e a comida chegou quentinha,elogio,baixa
+13,Não demorou nada e chegou antes do horário. Amei,elogio,baixa
+14,A tela de cupons dá erro quando tento aplicar o desconto,app_bug,media
+15,Pedi há 2 horas e o pedido 1003 não chegou,atraso,alta
+16,Veio sem talheres,item_faltando,baixa
+17,Cobraram um item que eu não pedi,cobranca,media
+18,Achei um inseto na salada,qualidade_comida,alta
+19,A comida estava sem gosto e esperava mais,qualidade_comida,media
+20,O app não carrega meu endereço salvo,app_bug,media
+21,Atrasou 20 minutos mas o entregador avisou então tudo bem,atraso,baixa
+22,Cobrança duplicada no pix e preciso de reembolso urgente,cobranca,alta
+23,Faltaram 2 itens do combo no pedido 1004,item_faltando,media
+24,O hambúrguer veio queimado e frio,qualidade_comida,media
+25,Aplicativo mostra erro 500 ao finalizar o pedido,app_bug,media
+26,Entrega muito demorada com quase 1 hora de atraso,atraso,media
+27,Amei o lanche nota 10,elogio,baixa
+28,Veio faltando a sobremesa,item_faltando,media
+29,Passei mal depois de comer e acho que estava estragado,qualidade_comida,alta
+30,O entregador foi grosseiro comigo,outro,media
