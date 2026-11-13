@@ -64,8 +64,9 @@ curl -X POST localhost:8000/triagem -H "Content-Type: application/json" \
 4. Ative o workflow e envie `POST` para a URL do webhook com `{"texto": "..."}`.
 5. Troque os nós *Fila urgente* / *Fila normal* por Slack, Google Sheets ou e-mail.
 
-> O arquivo do workflow é JSON válido, mas eu não consegui abri-lo num n8n real durante a construção. Se a importação reclamar de algum nó, recrie à mão: Webhook → HTTP Request (POST, corpo `{"texto": ...}`) → IF (`urgencia` igual a `alta`) → dois nós Set.
+Testado em 13/11/2026 num n8n local: o webhook recebeu `{"texto": "Achei um cabelo no hamburguer do pedido 1001"}`, chamou a API e o caso foi para a fila urgente. Esta execução usou o **modo regras** (API sem chave de IA). A URL do nó HTTP precisa ser `http://127.0.0.1:8000/triagem` quando o n8n roda direto no computador.
 
+![Fluxo no n8n, execução com todas as caixas verdes](docs/n8n-fluxo.png)
 ## Resultados
 
 Gabarito: 30 feedbacks escritos e rotulados por mim, de propósito com casos difíceis (ex.: *"Não demorou nada, amei"* contém "demorou" mas é elogio).
