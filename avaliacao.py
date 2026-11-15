@@ -5,7 +5,7 @@
   python avaliacao.py --modo gemini --pausa 5   # agente com Gemini (GEMINI_API_KEY); a pausa evita o limite gratuito
 
 Saída: acurácia de categoria, de urgência e das duas juntas, latência média e a lista de erros.
-Também grava resultados/avaliacao_<modo>.json.
+Também grava resultados/avaliacao_<modo>.json e .csv (compatível com Excel).
 """
 import argparse
 import csv
@@ -16,16 +16,27 @@ from pathlib import Path
 from triagem.agente import triagem
 
 RAIZ = Path(__file__).resolve().parent
+COLUNAS_CSV = [
+    "ID", "Texto", "Categoria esperada", "Categoria prevista",
+    "Urgência esperada", "Urgência prevista", "Acertou", "Erro",
+]
 
 
 def avaliar(modo: str, pausa: float = 0) -> dict:
     with (RAIZ / "dados" / "avaliacao.csv").open(encoding="utf-8") as f:
         casos = list(csv.DictReader(f))
     acertos_cat = acertos_urg = acertos_ambos = 0
-    latencias, erros, falhas = [], [], []
+    latencias, erros, falhas, linhas = [], [], [], []
     for i, c in enumerate(casos):
         if i and pausa:
             time.sleep(pausa)
+        linha = {
+            "ID": c["id"], "Texto": c["texto"],
+            "Categoria esperada": c["categoria"], "Categoria prevista": "",
+            "Urgência esperada": c["urgencia"], "Urgência prevista": "",
+            "Acertou": "não", "Erro": "falha na avaliação",
+        }
+        linhas.append(linha)
         t0 = time.perf_counter()
         try:
             r = triagem(c["texto"], modo=modo, registrar=False)
@@ -37,11 +48,25 @@ def avaliar(modo: str, pausa: float = 0) -> dict:
         acertos_cat += ok_cat
         acertos_urg += ok_urg
         acertos_ambos += ok_cat and ok_urg
+        linha.update({
+            "Categoria prevista": r["categoria"], "Urgência prevista": r["urgencia"],
+            "Acertou": "sim" if ok_cat and ok_urg else "não",
+            "Erro": ("nenhum" if ok_cat and ok_urg else
+                     "categoria e urgência" if not ok_cat and not ok_urg else
+                     "categoria" if not ok_cat else "urgência"),
+        })
         if not (ok_cat and ok_urg):
             erros.append({"id": c["id"], "texto": c["texto"],
                           "esperado": f'{c["categoria"]}/{c["urgencia"]}',
                           "previsto": f'{r["categoria"]}/{r["urgencia"]}'})
     n = len(casos)
+    destino = RAIZ / "resultados"
+    destino.mkdir(parents=True, exist_ok=True)
+    with (destino / f"avaliacao_{modo}.csv").open(
+            "w", encoding="utf-8-sig", newline="") as f:
+        escritor = csv.DictWriter(f, fieldnames=COLUNAS_CSV, delimiter=";")
+        escritor.writeheader()
+        escritor.writerows(linhas)
     return {
         "modo": modo, "casos": n, "falhas": len(falhas),
         "acuracia_categoria": round(acertos_cat / n, 3),
@@ -52,7 +77,7 @@ def avaliar(modo: str, pausa: float = 0) -> dict:
     }
 
 
-if __name__ == "__main__":
+def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--modo", choices=["regras", "llm", "gemini"], default="regras")
     ap.add_argument("--pausa", type=float, default=0, help="segundos de espera entre casos")
@@ -66,3 +91,7 @@ if __name__ == "__main__":
           f"| Ambas: {res['acuracia_ambos']:.0%} | Latência média: {res['latencia_media_s']}s")
     for e in res["erros"]:
         print(f'  #{e["id"]:>2} esperado {e["esperado"]:<26} previsto {e["previsto"]:<26} {e["texto"][:55]}')
+
+
+if __name__ == "__main__":
+    main()

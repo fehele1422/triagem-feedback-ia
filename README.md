@@ -57,6 +57,20 @@ curl -X POST localhost:8000/triagem -H "Content-Type: application/json" \
      -d '{"texto": "Fui cobrado duas vezes no cartão"}'
 ```
 
+### CSV da avaliação no Excel
+
+Ao executar `python avaliacao.py --modo regras` (ou `llm` / `gemini`), o resumo
+JSON e a saída no terminal continuam disponíveis. A avaliação também salva
+`resultados/avaliacao_<modo>.csv`, substituindo o CSV anterior do mesmo modo.
+O arquivo usa UTF-8 com BOM (para preservar acentos no Excel) e separador `;`.
+
+Cada feedback tem uma linha com as colunas **ID**, **Texto**, **Categoria esperada**,
+**Categoria prevista**, **Urgência esperada**, **Urgência prevista**, **Acertou**
+e **Erro**. “Acertou” é “sim” somente quando categoria e urgência estão corretas.
+“Erro” informa “nenhum”, “categoria”, “urgência” ou “categoria e urgência”.
+Se a chamada falhar, a linha permanece no CSV com previsões vazias, “Acertou”
+igual a “não” e “Erro” igual a “falha na avaliação”.
+
 ### n8n
 1. Suba o n8n (por exemplo `docker run -it --rm -p 5678:5678 n8nio/n8n`) e deixe `python -m triagem.api` rodando.
 2. No n8n: *Workflows → Import from file* → `n8n/workflow_triagem.json`.
