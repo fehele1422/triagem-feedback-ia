@@ -67,6 +67,11 @@ curl -X POST localhost:8000/triagem -H "Content-Type: application/json" \
 Testado em 13/11/2026 num n8n local: o webhook recebeu `{"texto": "Achei um cabelo no hamburguer do pedido 1001"}`, chamou a API e o caso foi para a fila urgente. Esta execução usou o **modo regras** (API sem chave de IA). A URL do nó HTTP precisa ser `http://127.0.0.1:8000/triagem` quando o n8n roda direto no computador.
 
 ![Fluxo no n8n, execução com todas as caixas verdes](docs/n8n-fluxo.png)
+
+Segunda execução, em 15/11/2026, com a API em **modo Gemini**: o mesmo webhook chamou o agente, que consultou o pedido 1001, abriu o chamado e devolveu categoria `qualidade_comida`, urgência `alta` e resposta sugerida. A saída mostra `"modo": "gemini"` e os `passos` das ferramentas usadas.
+
+![Saída do agente com Gemini dentro do n8n](docs/n8n-saida-gemini.png)
+
 ## Resultados
 
 Gabarito: 30 feedbacks escritos e rotulados por mim, de propósito com casos difíceis (ex.: *"Não demorou nada, amei"* contém "demorou" mas é elogio).
