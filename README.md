@@ -29,7 +29,7 @@ n8n (Webhook) ──► POST /triagem ──► agente ──► Claude (API)
 | Automação | `n8n/workflow_triagem.json` | webhook → chama a API → decide pela urgência |
 | Baseline sem IA | `triagem/regras.py` | ponto de comparação por palavras-chave |
 | Avaliação | `avaliacao.py`, `dados/avaliacao.csv` | 30 casos rotulados à mão, acurácia e latência |
-| Testes | `tests/test_triagem.py` | 15 testes sem rede, com Claude e Gemini substituídos por dublês |
+| Testes | `tests/test_triagem.py` | 19 testes sem rede, com Claude e Gemini substituídos por dublês |
 
 ## Como rodar
 
@@ -117,7 +117,14 @@ Erros do baseline: ele não entende negação (*"não demorou nada"*), cai em "o
 - **A IA não decide reembolso.** O prompt proíbe prometer; a decisão é humana.
 
 ## Como este projeto foi construído
-Foi desenvolvido com apoio de uma IA (Claude) e revisado por mim. _Escreva aqui, com suas palavras, o que você alterou ou testou por conta própria (ver "Próximos passos")._
+O agente, a API e o n8n foram desenvolvidos com apoio do Claude, e eu revisei, rodei e testei tudo no meu computador. Rodei a avaliação de verdade com o Gemini (93% de acerto em categoria e urgência juntas) e montei o fluxo no n8n. 
+Depois, usei o Replit Agent (vibe coding) para uma melhoria que eu pedi: exportar a avaliação em CSV. Meu prompt foi: "Quero que o avaliacao.py salve também um arquivo CSV em resultados/ com uma linha por feedback: id, texto, 
+categoria esperada, categoria prevista, urgência esperada, urgência prevista e se acertou. Não mude o que já funciona e rode os testes depois. Quero que o CSV abra bem no Excel, com acentos corretos e nomes de coluna claros em português. 
+Também quero uma coluna que diga em quê a IA errou (categoria, urgência ou as duas) e um teste automático que confira se o CSV é criado com as colunas certas." 
+O Agent alterou avaliacao.py e criou tests/test_avaliacao.py. Eu conferi o código, rodei os 19 testes (todos passaram) e abri o CSV no Excel para ver se os acentos e as colunas estavam certos.
+Aprendi que combinar diferentes IAs em cada etapa otimiza o desenvolvimento de ponta a ponta, mas a validação humana rigorosa e os testes automatizados continuam sendo essenciais para garantir a confiabilidade dos dados e do código.
+Completo que o uso do Replit Agent mostrou a agilidade do vibe coding, reforçando que a velocidade de entrega gerada por ferramentas de IA funciona melhor quando aliada a uma boa cobertura de testes e conferência manual dos detalhes.
+Na prática, os créditos do Replit Agent acabaram antes de ele mostrar que rodou os testes. Eu rodei os 19 testes no meu computador e todos passaram, e foi só aí que considerei o trabalho pronto.
 
 ## Próximos passos
 - [ ] Rodar `--modo gemini` (ou `--modo llm`) e preencher a tabela de resultados.

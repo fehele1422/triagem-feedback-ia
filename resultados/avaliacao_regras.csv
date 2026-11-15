@@ -1,0 +1,31 @@
+﻿ID;Texto;Categoria esperada;Categoria prevista;Urgência esperada;Urgência prevista;Acertou;Erro
+1;Meu pedido 1001 demorou mais de uma hora e meia para chegar;atraso;atraso;alta;media;não;urgência
+2;Chegou uns 10 minutos depois do previsto sem problemas;atraso;outro;baixa;media;não;categoria e urgência
+3;Faltou o refrigerante no pedido 1002;item_faltando;item_faltando;media;media;sim;nenhum
+4;Esqueceram a batata frita e só veio o hambúrguer;item_faltando;item_faltando;media;media;sim;nenhum
+5;Fui cobrado duas vezes no cartão pelo mesmo pedido;cobranca;cobranca;alta;alta;sim;nenhum
+6;Quero o estorno da taxa de entrega pois foi cobrada mesmo com frete grátis;cobranca;cobranca;media;media;sim;nenhum
+7;Encontrei um cabelo na minha comida;qualidade_comida;qualidade_comida;alta;alta;sim;nenhum
+8;A pizza chegou fria e a massa crua;qualidade_comida;qualidade_comida;media;media;sim;nenhum
+9;Tenho alergia a amendoim e o prato veio com amendoim e estou passando mal;qualidade_comida;outro;alta;alta;não;categoria
+10;O aplicativo travou na hora de pagar e não abre mais;app_bug;app_bug;media;media;sim;nenhum
+11;Parabéns ao entregador super educado e rápido;elogio;elogio;baixa;baixa;sim;nenhum
+12;Excelente atendimento e a comida chegou quentinha;elogio;elogio;baixa;baixa;sim;nenhum
+13;Não demorou nada e chegou antes do horário. Amei;elogio;atraso;baixa;media;não;categoria e urgência
+14;A tela de cupons dá erro quando tento aplicar o desconto;app_bug;app_bug;media;media;sim;nenhum
+15;Pedi há 2 horas e o pedido 1003 não chegou;atraso;atraso;alta;alta;sim;nenhum
+16;Veio sem talheres;item_faltando;item_faltando;baixa;media;não;urgência
+17;Cobraram um item que eu não pedi;cobranca;cobranca;media;media;sim;nenhum
+18;Achei um inseto na salada;qualidade_comida;outro;alta;alta;não;categoria
+19;A comida estava sem gosto e esperava mais;qualidade_comida;outro;media;media;não;categoria
+20;O app não carrega meu endereço salvo;app_bug;app_bug;media;media;sim;nenhum
+21;Atrasou 20 minutos mas o entregador avisou então tudo bem;atraso;atraso;baixa;media;não;urgência
+22;Cobrança duplicada no pix e preciso de reembolso urgente;cobranca;cobranca;alta;alta;sim;nenhum
+23;Faltaram 2 itens do combo no pedido 1004;item_faltando;item_faltando;media;media;sim;nenhum
+24;O hambúrguer veio queimado e frio;qualidade_comida;qualidade_comida;media;media;sim;nenhum
+25;Aplicativo mostra erro 500 ao finalizar o pedido;app_bug;app_bug;media;media;sim;nenhum
+26;Entrega muito demorada com quase 1 hora de atraso;atraso;atraso;media;media;sim;nenhum
+27;Amei o lanche nota 10;elogio;elogio;baixa;baixa;sim;nenhum
+28;Veio faltando a sobremesa;item_faltando;item_faltando;media;media;sim;nenhum
+29;Passei mal depois de comer e acho que estava estragado;qualidade_comida;qualidade_comida;alta;alta;sim;nenhum
+30;O entregador foi grosseiro comigo;outro;outro;media;media;sim;nenhum

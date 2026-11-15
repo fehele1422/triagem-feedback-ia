@@ -1,0 +1,60 @@
+{
+  "modo": "regras",
+  "casos": 30,
+  "falhas": 0,
+  "acuracia_categoria": 0.833,
+  "acuracia_urgencia": 0.833,
+  "acuracia_ambos": 0.733,
+  "latencia_media_s": 0.0,
+  "erros": [
+    {
+      "id": "1",
+      "texto": "Meu pedido 1001 demorou mais de uma hora e meia para chegar",
+      "esperado": "atraso/alta",
+      "previsto": "atraso/media"
+    },
+    {
+      "id": "2",
+      "texto": "Chegou uns 10 minutos depois do previsto sem problemas",
+      "esperado": "atraso/baixa",
+      "previsto": "outro/media"
+    },
+    {
+      "id": "9",
+      "texto": "Tenho alergia a amendoim e o prato veio com amendoim e estou passando mal",
+      "esperado": "qualidade_comida/alta",
+      "previsto": "outro/alta"
+    },
+    {
+      "id": "13",
+      "texto": "Não demorou nada e chegou antes do horário. Amei",
+      "esperado": "elogio/baixa",
+      "previsto": "atraso/media"
+    },
+    {
+      "id": "16",
+      "texto": "Veio sem talheres",
+      "esperado": "item_faltando/baixa",
+      "previsto": "item_faltando/media"
+    },
+    {
+      "id": "18",
+      "texto": "Achei um inseto na salada",
+      "esperado": "qualidade_comida/alta",
+      "previsto": "outro/alta"
+    },
+    {
+      "id": "19",
+      "texto": "A comida estava sem gosto e esperava mais",
+      "esperado": "qualidade_comida/media",
+      "previsto": "outro/media"
+    },
+    {
+      "id": "21",
+      "texto": "Atrasou 20 minutos mas o entregador avisou então tudo bem",
+      "esperado": "atraso/baixa",
+      "previsto": "atraso/media"
+    }
+  ],
+  "falhas_detalhe": []
+}
